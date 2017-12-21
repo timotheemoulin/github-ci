@@ -3,3 +3,13 @@ rvm:
  - 2.2
  - jruby
  - rbx-3
+ 
+addons:
+  apt:
+    packages:
+      - aspell
+      - aspell-en
+      - aspell-fr
+      
+script:
+  - bundle exec rake
