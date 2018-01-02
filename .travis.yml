@@ -14,6 +14,7 @@ addons:
     - texlive
     - texlive-xetex
     - lmodern
+    - texlive-latex-extra
 script:
 - bundle exec rake spell_check
 - bundle exec rake md_pdf
