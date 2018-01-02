@@ -8,6 +8,8 @@
 
 [Version française ici](README.fr.md)
 
+Build status : [![Build Status](https://travis-ci.org/timotheemoulin/github-ci.svg?branch=master)](https://travis-ci.org/timotheemoulin/github-ci)
+
 ## Aspell
 
 Aspell is a spell checker that can be used to check your *markdown* files.

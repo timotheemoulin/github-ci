@@ -8,6 +8,8 @@
 
 [English version here](README.md)
 
+Etat de la version : [![Build Status](https://travis-ci.org/timotheemoulin/github-ci.svg?branch=master)](https://travis-ci.org/timotheemoulin/github-ci)
+
 ## Aspell
 
 Aspell est un correcteur orthographique. Vous pouvez l'utiliser pour vérifier vos fichiers *markdown* et ainsi vous assurer que votre documentation ne contient pas d'erreur.
