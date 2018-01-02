@@ -91,15 +91,13 @@ Where :
 ### Global structure
 
 ```
-|-- .aspell
-    |-- aspell.en.pws
-    |-- aspell.{lang}.pws
-|-- bin
-    |-- spell-check.sh
-|-- .travis.yml
-|-- Gemfile
-|-- Rakefile
-|-- Some-file.md
-|-- Doc
-    |-- Some-doc.md
+.
+├── bin
+│   └── spell-check.sh
+├── doc
+│   └── foo.md
+├── Gemfile
+├── LICENSE
+├── Rakefile
+├── README.md
 ```
