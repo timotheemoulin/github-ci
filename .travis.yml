@@ -1,4 +1,4 @@
-bulanguage: ruby
+language: ruby
 
 branches:
   only:
