@@ -4,11 +4,11 @@
 #Language: fr
 -->
 
-#Github-CI
+# Github-CI
 
 [English version here](README.md)
 
-##Aspell
+## Aspell
 
 Aspell est un correcteur orthographique. Vous pouvez l'utiliser pour vérifier vos fichiers *markdown* et ainsi vous assurer que votre documentation ne contient pas d'erreur.
 

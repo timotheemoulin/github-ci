@@ -4,11 +4,11 @@
 #Language: en
 -->
 
-#Github-CI
+# Github-CI
 
 [Version française ici](README.fr.md)
 
-##Aspell
+## Aspell
 
 Aspell is a spell checker that can be used to check your *markdown* files.
 
