@@ -58,12 +58,12 @@ CHANGED_CONTENT=`echo "$CHANGED_CONTENT" | sed -E 's/\]((\w*)\)//g'`
 
 # Check content spelling in English
 echo -e "$BLUE>> Checking in English (many technical words are in English anyway)...$NC"
-MISSPELLED=`echo "$CHANGED_CONTENT" | aspell --lang=en --personal=./.aspell/.aspell.en.pws list | sort -u`
+MISSPELLED=`echo "$CHANGED_CONTENT" | aspell --lang=en --personal=./.aspell/aspell.en.pws list | sort -u`
 
 # Check content spelling in the detected language
 if [ "$FILE_LANGUAGE" != "en" ]; then
     echo -e "$BLUE>> Checking in '$FILE_LANGUAGE' too..."
-    MISSPELLED=`echo "$MISSPELLED" | aspell --lang=$FILE_LANGUAGE --personal=./.aspell/.aspell.$FILE_LANGUAGE.pws list | sort -u`
+    MISSPELLED=`echo "$MISSPELLED" | aspell --lang=$FILE_LANGUAGE --personal=./.aspell/aspell.$FILE_LANGUAGE.pws list | sort -u`
 fi
 
 if [ -n "$MISSPELLED" ] ; then

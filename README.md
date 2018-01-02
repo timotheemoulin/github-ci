@@ -87,3 +87,19 @@ Where :
 * *en* stands for the language name (same as in the file name)
 * *999* stands for the number of words in the dictionary (use a big number here if you don't want to change it everytime)
 * *utf-8* is the encoding used in your file (keep it to *utf-8* if you need to use accents (like in French or German) or if your dictionnary is used for multiple languages)
+
+### Global structure
+
+```
+|- .aspell
+ |- aspell.en.pws
+ |- aspell.{lang}.pws
+|- bin
+ |- spell-check.sh
+|- .travis.yml
+|- Gemfile
+|- Rakefile
+|- Some-file.md
+|- Doc
+ |- Some-doc.md
+```
