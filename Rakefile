@@ -17,5 +17,5 @@ task :md_pdf do
   MDFILES = FileList["*.md"]
 	PDFS = MDFILES.ext(".pdf")
 
-	sh 'pandoc --latex-engine=xelatex README.md -f markdown -S -o README.pdf'
+	sh 'pandoc --latex-engine=xelatex --self-contained README.md -f markdown -S -o README.pdf'
 end
