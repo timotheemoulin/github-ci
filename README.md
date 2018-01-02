@@ -91,13 +91,11 @@ Where :
 ### Global structure
 
 ```
-.
 ├── bin
 │   └── spell-check.sh
 ├── doc
 │   └── foo.md
 ├── Gemfile
-├── LICENSE
 ├── Rakefile
 ├── README.md
 ```
