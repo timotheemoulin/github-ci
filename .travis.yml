@@ -1,10 +1,8 @@
 language: ruby
-
 branches:
   only:
   - master|[\d\.]*
 cache: bundler
-
 addons:
   apt:
     #https://github.com/travis-ci/apt-package-whitelist/blob/master/ubuntu-precise
@@ -27,3 +25,5 @@ deploy:
     secure: dhXWfqTDZRF8zdpl3pOUjVp6PoDJGyzJDzkC+u2jNFDbO3wona58y/BsBLyMCjKfGadZoNPN397I6aOxr6QWVqgbHmGWJ06V3XiubNWnT3Tw96Bv4BZixZwiPazCCB6s+SutlbVexHOsg2kQGQTRIUFU3dtanw2aJuYLZwWG3q9KkYu1wNDIAu5GN1YXxHMVlurna9/p8QbuZXPg5j7/NY35KnXRHGtThbFl9rA2RvYh7EhlH8gJXAW7MKAwDMnrlNFefxjLEkccQTFXRzPVsiOHxHAVsW5zOAJ2a3UWwERqL/BjiBED6A2+TNUWzrTbql2OL3y07Rhq0zFwBfn9ZrTl3HA7nbUYzCfi5DZGnCs2Hmthc8XLqoa4BPJ6UERNMsD0R1MnAb9OyRWW08dPkaAQRfoMfLA1Oec/2RbsNc9UhasQ0dvr/rB0ATFEz/N4t3fCr6kn75ykgT4YAKbvje447BH25ei6yLyJPZWv1LB9eRBalOM9JU8HtwiztZlWhOWkDhjHqAXX6mjGTjHK9en4QjTfaEukT4X2v5E+ZfEGILnvcV8SNAzwr2fUMiy3T6v9wAjOGT31WeplZ8cc0RLaH92vDoR9QfkdiZXus3SQQRS8nMzaLCXJF0rbQiRYlDhBRTt19QXFH+Q9u2dV/7zZe0FUBppsx0c88mSvuhs=
   file: README.pdf
   skip_cleanup: true
+  on:
+    tags: true
