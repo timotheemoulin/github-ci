@@ -6,6 +6,8 @@ GREEN='\033[0;32m'
 BLUE='\033[0;36m'
 NC='\033[0m' # No Color
 
+TRAVIS_COMMIT_RANGE="720528cca18b...HEAD"
+
 # Only work on markdown files
 MARKDOWN_FILES_CHANGED=`(git diff --name-only $TRAVIS_COMMIT_RANGE || true) | grep .md`
 
@@ -63,13 +65,13 @@ echo "$TEXT_CONTENT_WITHOUT_METADATA"
 
 # Check content spelling in English
 echo -e "$BLUE>> Checking in 'en' (many technical words are in English anyway)...$NC"
-MISSPELLED=`echo "$TEXT_CONTENT_WITHOUT_METADATA" | aspell --lang=en --encoding=utf-8 --personal=./.aspell.en.pws list | sort -u`
+MISSPELLED=`echo "$TEXT_CONTENT_WITHOUT_METADATA" | aspell --lang=en --encoding=utf-8 --personal=.aspell/.aspell.en.pws list | sort -u`
 
 # Check content spelling in the detected language
 if [ "$USE_LANGUAGE" != "en" ]
 then
     echo -e "$BLUE>> Checking in '$USE_LANGUAGE' too..."
-    MISSPELLED=`echo "$MISSPELLED" | aspell --lang=$USE_LANGUAGE --encoding=utf-8 --personal=./.aspell.$USE_LANGUAGE.pws list | sort -u`
+    MISSPELLED=`echo "$MISSPELLED" | aspell --lang=$USE_LANGUAGE --encoding=utf-8 --personal=.aspell/.aspell.$USE_LANGUAGE.pws list | sort -u`
 fi
 
 NB_MISSPELLED=`echo "$MISSPELLED" | wc -l`
