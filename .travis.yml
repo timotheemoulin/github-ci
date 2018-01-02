@@ -5,6 +5,7 @@ branches:
 cache: bundler
 addons:
   apt:
+    #https://github.com/travis-ci/apt-package-whitelist/blob/master/ubuntu-precise
     packages:
     - aspell
     - aspell-en
@@ -12,6 +13,7 @@ addons:
     - pandoc
     - texlive
     - texlive-xetex
+    - lmodern
 script:
 - bundle exec rake spell_check
 - bundle exec rake md_pdf
