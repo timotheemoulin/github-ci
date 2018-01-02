@@ -6,9 +6,9 @@
 
 # Github-CI
 
-[Version française ici](README.fr.md)
+[![Build Status](https://travis-ci.org/timotheemoulin/github-ci.png?branch=master)](https://travis-ci.org/timotheemoulin/github-ci)
 
-Build status [![Build Status](https://travis-ci.org/timotheemoulin/github-ci.png?branch=master)](https://travis-ci.org/timotheemoulin/github-ci)
+[Version française ici](README.fr.md)
 
 ## Aspell
 
