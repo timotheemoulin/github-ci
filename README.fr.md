@@ -8,7 +8,7 @@
 
 [English version here](README.md)
 
-Etat de la version : [![Build Status](https://travis-ci.org/timotheemoulin/github-ci.svg?branch=master)](https://travis-ci.org/timotheemoulin/github-ci)
+Etat de la version [![Build Status](https://travis-ci.org/timotheemoulin/github-ci.svg?branch=master)](https://travis-ci.org/timotheemoulin/github-ci)
 
 ## Aspell
 
