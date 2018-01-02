@@ -6,72 +6,57 @@ GREEN='\033[0;32m'
 BLUE='\033[0;36m'
 NC='\033[0m' # No Color
 
-TRAVIS_COMMIT_RANGE="720528cca18b...HEAD"
+SPELL_LANGUAGE='en'
 
-# Only work on markdown files
-MARKDOWN_FILES_CHANGED=`(git diff --name-only $TRAVIS_COMMIT_RANGE || true) | grep .md`
+# Allow executing this file without being in the travis execution
+if [ -z "$TRAVIS_COMMIT_RANGE" ];
+then
+	TRAVIS_COMMIT_RANGE=$(git rev-list HEAD | tail -n 1)
+	TRAVIS_COMMIT_RANGE="$TRAVIS_COMMIT_RANGE...HEAD"
+fi
 
-echo -e "Beginning spell checking"
+# Only check markdown files
+CHANGED_FILES=`(git diff --name-only $TRAVIS_COMMIT_RANGE || true) | grep .md`
+
+echo -e "$BLUE>> Beginning spell checking$NC"
 
 # Checks if there is at least one file to check
-if [ -z "$MARKDOWN_FILES_CHANGED" ]
+if [ -z "$CHANGED_FILES" ]
 then
     echo -e "$GREEN>> No markdown file to check $NC"
 
     exit 0;
 fi
 
-# List MD files that have change
+# List MD files that have changed
 echo -e "$BLUE>> Following markdown files were changed (commit range: $TRAVIS_COMMIT_RANGE):$NC"
-echo "$MARKDOWN_FILES_CHANGED"
+echo "$CHANGED_FILES"
 
-# Get found language (en|fr only)
-FOUND_LANGUAGES=`echo "$MARKDOWN_FILES_CHANGED" | xargs cat | grep "permalink: /" | sed -E 's/permalink: \/(fr|en)\/.*/\1/g'`
-echo -e "$BLUE>> Languages recognized from the permalinks:$NC"
-echo "$FOUND_LANGUAGES"
+echo -e "$BLUE>> Text will be checked without metadata, html, and links:$NC"
 
-while read LINE
-do
-    if [ "$LINE" != "en" ]
-    then
-        USE_LANGUAGE="$LINE"
-
-    fi
-done <<< "$FOUND_LANGUAGES"
-
-if [ -z "$USE_LANGUAGE" ]
-then
-    USE_LANGUAGE='en'
-fi
-
-echo -e "$BLUE>> Will use this language as main one:$NC"
-echo "$USE_LANGUAGE"
-
-# Cat all markdown files that changed
-TEXT_CONTENT_WITHOUT_METADATA=`cat $(echo "$MARKDOWN_FILES_CHANGED" | sed -E ':a;N;$!ba;s/\n/ /g')`
+# Get the content of all markdown files that changed
+CHANGED_CONTENT=`cat $(echo "$CHANGED_FILES" | sed -E ':a;N;$!ba;s/\n/ /g')`
 # Remove metadata tags
-TEXT_CONTENT_WITHOUT_METADATA=`echo "$TEXT_CONTENT_WITHOUT_METADATA" | grep -v -E '^(layout:|permalink:|date:|date_gmt:|authors:|categories:|tags:|cover:)(.*)'`
+CHANGED_CONTENT=`echo "$CHANGED_CONTENT" | grep -v -E '^(layout:|permalink:|date:|date_gmt:|authors:|categories:|tags:|cover:)(.*)'`
 # Remove { } attributes
-TEXT_CONTENT_WITHOUT_METADATA=`echo "$TEXT_CONTENT_WITHOUT_METADATA" | sed -E 's/\{:([^\}]+)\}//g'`
+CHANGED_CONTENT=`echo "$CHANGED_CONTENT" | sed -E 's/\{:([^\}]+)\}//g'`
 # Remove html
-TEXT_CONTENT_WITHOUT_METADATA=`echo "$TEXT_CONTENT_WITHOUT_METADATA" | sed -E 's/<([^<]+)>//g'`
+CHANGED_CONTENT=`echo "$CHANGED_CONTENT" | sed -E 's/<([^<]+)>//g'`
 # Remove code blocks
-TEXT_CONTENT_WITHOUT_METADATA=`echo "$TEXT_CONTENT_WITHOUT_METADATA" | sed  -n '/^\`\`\`/,/^\`\`\`/ !p'`
+CHANGED_CONTENT=`echo "$CHANGED_CONTENT" | sed  -n '/^\`\`\`/,/^\`\`\`/ !p'`
 # Remove links
-TEXT_CONTENT_WITHOUT_METADATA=`echo "$TEXT_CONTENT_WITHOUT_METADATA" | sed -E 's/http(s)?:\/\/([^ ]+)//g'`
+CHANGED_CONTENT=`echo "$CHANGED_CONTENT" | sed -E 's/http(s)?:\/\/([^ ]+)//g'`
 
-echo -e "$BLUE>> Text content that will be checked (without metadata, html, and links):$NC"
-echo "$TEXT_CONTENT_WITHOUT_METADATA"
 
 # Check content spelling in English
-echo -e "$BLUE>> Checking in 'en' (many technical words are in English anyway)...$NC"
-MISSPELLED=`echo "$TEXT_CONTENT_WITHOUT_METADATA" | aspell --lang=en --encoding=utf-8 --personal=.aspell/.aspell.en.pws list | sort -u`
+echo -e "$BLUE>> Checking in English (many technical words are in English anyway)...$NC"
+MISSPELLED=`echo "$CHANGED_CONTENT" | aspell --lang=en --personal=./.aspell/.aspell.en.pws list | sort -u`
 
 # Check content spelling in the detected language
-if [ "$USE_LANGUAGE" != "en" ]
+if [ "$SPELL_LANGUAGE" != "en" ]
 then
-    echo -e "$BLUE>> Checking in '$USE_LANGUAGE' too..."
-    MISSPELLED=`echo "$MISSPELLED" | aspell --lang=$USE_LANGUAGE --encoding=utf-8 --personal=.aspell/.aspell.$USE_LANGUAGE.pws list | sort -u`
+    echo -e "$BLUE>> Checking in '$SPELL_LANGUAGE' too..."
+    MISSPELLED=`echo "$MISSPELLED" | aspell --lang=$SPELL_LANGUAGE --personal=./.aspell/.aspell.$SPELL_LANGUAGE.pws list | sort -u`
 fi
 
 NB_MISSPELLED=`echo "$MISSPELLED" | wc -l`
@@ -86,5 +71,7 @@ else
     COMMENT="No spelling errors, congratulations!"
     echo -e "$GREEN>> $COMMENT $NC"
 fi
+
+echo $COMMENT
 
 exit 0
