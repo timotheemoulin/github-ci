@@ -1,7 +1,7 @@
 language: ruby
 branches:
   only:
-  - master|[\d\.]*
+  - /master|[\d\.]*/
 cache: bundler
 addons:
   apt:
