@@ -6,11 +6,9 @@
 
 # Github-CI
 
-[![Build Status](https://travis-ci.org/timotheemoulin/github-ci.png?branch=master){ height=20px }](https://travis-ci.org/timotheemoulin/github-ci)
+[![Build Status](assets/passing.png)](https://travis-ci.org/timotheemoulin/github-ci)
 
 [Version française ici](README.fr.md)
-
-[![Build Status](assets/passing.png)](https://travis-ci.org/timotheemoulin/github-ci)
 
 ## Aspell
 
