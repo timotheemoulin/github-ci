@@ -8,7 +8,8 @@ echo "<html><head>" > $tmpfile
 echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"/data/.phantom/github.css\">" >> $tmpfile
 echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"$cssfile\">" >> $tmpfile
 echo "</head><body>" >> $tmpfile
-markdown $inputfile | iconv -f utf8 -t l1 >> $tmpfile
+#markdown $inputfile | iconv -f utf8 -t l1 >> $tmpfile
+markdown $inputfile >> $tmpfile
 echo "</body></html>" >> $tmpfile
 phantomjs /data/.phantom/rasterize.js $tmpfile $outputfile A4
 rm $tmpfile
