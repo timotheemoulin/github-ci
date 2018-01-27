@@ -1,5 +1,5 @@
 .vscode
 .idea
 
-#.phantom/build/
-#!.phantom/build/.gitkeep
+.phantom/build/
+!.phantom/build/.gitkeep
