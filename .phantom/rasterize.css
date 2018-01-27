@@ -1,0 +1,37 @@
+body {
+    font-size: 12px;
+    line-height: 1.4;
+}
+
+h1 {
+    font-size: 20px;
+}
+
+h2 {
+    font-size: 18px;
+}
+
+h3 {
+    font-size: 16px;
+}
+
+h4 {
+    font-size: 14px;
+}
+
+h5 {
+    font-size: 12px;
+}
+
+h6 {
+    font-size: 12px;
+}
+
+dl dt{
+    font-size: 12px;
+}
+
+.highlight pre,
+pre {
+    font-size: 12px;
+}
