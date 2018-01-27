@@ -1,0 +1,4 @@
+.vscode
+
+.phantom/build/
+!.phantom/build/.gitkeep

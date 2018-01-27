@@ -1,17 +1,31 @@
-language: ruby
+# sudo is required to install docker-compose
+sudo: required
 
-branches:
-  only:
-  - develop
-
+# enable cache on bundler
 cache: bundler
 
-addons:
-  apt:
-    packages:
-      - aspell
-      - aspell-en
-      - aspell-fr
+# specify env
+env:
+  - DOCKER_COMPOSE_VERSION=1.17.1
+
+# we want to use a docker container
+services:
+  - docker
+
+before_install:
+  # upgrade docker-compose
+  - sudo rm /usr/local/bin/docker-compose
+  - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
+  - chmod +x docker-compose
+  - sudo mv docker-compose /usr/local/bin
 
 script:
-  - bundle exec rake
+  # run the phantom container 
+  - docker-compose -f .phantom/docker-compose.yml run phantom .phantom/rasterize.sh README.md .phantom/build/README.pdf
+
+# during release, upload the generated PDF
+deploy:
+  provider: releases
+  api_key:
+    secure: f7UQTJAwibKKhS3apK04FBGvJZTXU2IVlFE2zJmhU0R/iQurOAe9UtbdpdA9OG1cToQj7tYIUcA3mMAz8F0loYixFT0oeDfCDW5QiZkDAtOOE4+2QYjpuquB9ZkVCDAJyi08j6xMK/LxkK+Br1gfChXXa/cLZtTh4uWjbBL5IcqajzyNFe3ga+RXdXtXFgxnw2ANef8l7IbrZ+VkpvihpZfXvER4odQd3C2QjltZVJBmTHpDGxLC3+0uPm8GGEFem9ljiWk55ilXRpGs6awc/Q5aUzN5Utwpzt1hMk+qC4+n6/TzRobNuOCsup9se3+PzT8Z9TwFlZ50q9nc7l6Vm79d9uvbj/WGxsRgUrzOpJ0jjC4HtqtXTvOnwLeYNN7/CiKcO/KhTE7h3nKAQTb2UQ16kflMUB2Opa4irwGVO0t8xi5mimbRGeED1sHdfURrSogiZfFIJjvSlAIfITQPBaDLIGhrueiCNuPpr1lV7VqqkiU6nYUVl/yrEkXY/spppFTpdUNzGi5OEU2x/2JXUD0a/hjzjoEXc7cfj/edJcq3DIqlRDaeJUTKMRKzu2yKIIrkKt7KosCwTfsq3X+yomHaKCX7p8HA3yIDezErcUBgo5Q8MssUB5ZyDOFKLFK2wKK52F3pNcB2p2+qj66/4OgclCjnSu9bVQNBRqSOP60=
+  file: "/data/.phantom/build/README.pdf"
