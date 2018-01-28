@@ -34,6 +34,7 @@ script:
   - bundle exec rake spell_check
   # run the phantom container
   - docker-compose -f .phantom/docker-compose.yml build
+  - touch .phantom/build/foo
   - docker-compose -f .phantom/docker-compose.yml run phantom .phantom/rasterize.sh README.md .phantom/build/README.pdf
   - ls -la .phantom/build
 
