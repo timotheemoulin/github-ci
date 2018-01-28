@@ -6,7 +6,7 @@
 
 # Github-CI
 
-[![Build Status](assets/passing.png)](https://travis-ci.org/timotheemoulin/github-ci)
+[![Build Status](https://travis-ci.org/timotheemoulin/github-ci.svg?branch=master)](https://travis-ci.org/timotheemoulin/github-ci)
 
 [Version française ici](README.fr.md)
 
@@ -91,11 +91,11 @@ Where :
 ### Global structure
 
 ```
-├── bin
-│   └── spell-check.sh
-├── doc
-│   └── foo.md
-├── Gemfile
-├── Rakefile
-├── README.md
+|-- bin
+|   |-- spell-check.sh
+|-- doc
+|   |-- foo.md
+|-- Gemfile
+|-- Rakefile
+|-- README.md
 ```
