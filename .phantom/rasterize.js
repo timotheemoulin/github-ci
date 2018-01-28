@@ -11,7 +11,7 @@ if (system.args.length < 3 || system.args.length > 5) {
     phantom.exit(1);
 } else {
     settings = {
-        encoding: "utf8"
+        encoding: "iso-8859-1"
     };
     address = system.args[1];
     output = system.args[2];
