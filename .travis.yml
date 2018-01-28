@@ -35,6 +35,7 @@ script:
   # run the phantom container
   - docker-compose -f .phantom/docker-compose.yml build
   - docker-compose -f .phantom/docker-compose.yml run phantom /data/.phantom/rasterize.sh /data/README.md /data/.phantom/build/README.pdf
+  - docker-compose -f .phantom/docker-compose.yml run phantom touch .phantom/build/foo
   - docker-compose -f .phantom/docker-compose.yml run phantom ls -la .phantom/build
 
 # use the tag as a release and upload the generated PDF as an artifact
