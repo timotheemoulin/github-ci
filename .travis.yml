@@ -34,7 +34,7 @@ script:
   - bundle exec rake spell_check
   # run the phantom container
   - docker-compose -f .phantom/docker-compose.yml build
-  - docker-compose -f .phantom/docker-compose.yml run phantom .phantom/rasterize.sh README.md README.pdf
+  - docker-compose -f .phantom/docker-compose.yml run phantom .phantom/rasterize.sh README.md .phantom/build/README.pdf
 
 # use the tag as a release and upload the generated PDF as an artifact
 deploy:
