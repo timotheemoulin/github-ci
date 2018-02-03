@@ -14,13 +14,13 @@ env:
 services:
   - docker
 
-addons:
-  apt:
-    #https://github.com/travis-ci/apt-package-whitelist/blob/master/ubuntu-precise
-    packages:
-    - aspell
-    - aspell-en
-    - aspell-fr
+# addons:
+#   apt:
+#     #https://github.com/travis-ci/apt-package-whitelist/blob/master/ubuntu-precise
+#     packages:
+#     - aspell
+#     - aspell-en
+#     - aspell-fr
 
 before_install:
   # upgrade docker-compose
@@ -31,7 +31,7 @@ before_install:
 
 script:
   # run the spell check
-  - bundle exec rake spell_check
+  # - bundle exec rake spell_check
   # run the phantom container
   - docker-compose -f .phantom/docker-compose.yml build
   - docker-compose -f .phantom/docker-compose.yml run phantom /data/.phantom/rasterize.sh /data/README.md /data/.phantom/build/README.pdf
