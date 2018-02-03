@@ -1,7 +1,7 @@
 version: '3'
 services:
   phantom:
-    build: .
+    build: ./.phantom
     volumes: 
       - ./:/data
     container_name: phantom
