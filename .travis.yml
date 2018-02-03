@@ -46,5 +46,5 @@ deploy:
     secure: f7UQTJAwibKKhS3apK04FBGvJZTXU2IVlFE2zJmhU0R/iQurOAe9UtbdpdA9OG1cToQj7tYIUcA3mMAz8F0loYixFT0oeDfCDW5QiZkDAtOOE4+2QYjpuquB9ZkVCDAJyi08j6xMK/LxkK+Br1gfChXXa/cLZtTh4uWjbBL5IcqajzyNFe3ga+RXdXtXFgxnw2ANef8l7IbrZ+VkpvihpZfXvER4odQd3C2QjltZVJBmTHpDGxLC3+0uPm8GGEFem9ljiWk55ilXRpGs6awc/Q5aUzN5Utwpzt1hMk+qC4+n6/TzRobNuOCsup9se3+PzT8Z9TwFlZ50q9nc7l6Vm79d9uvbj/WGxsRgUrzOpJ0jjC4HtqtXTvOnwLeYNN7/CiKcO/KhTE7h3nKAQTb2UQ16kflMUB2Opa4irwGVO0t8xi5mimbRGeED1sHdfURrSogiZfFIJjvSlAIfITQPBaDLIGhrueiCNuPpr1lV7VqqkiU6nYUVl/yrEkXY/spppFTpdUNzGi5OEU2x/2JXUD0a/hjzjoEXc7cfj/edJcq3DIqlRDaeJUTKMRKzu2yKIIrkKt7KosCwTfsq3X+yomHaKCX7p8HA3yIDezErcUBgo5Q8MssUB5ZyDOFKLFK2wKK52F3pNcB2p2+qj66/4OgclCjnSu9bVQNBRqSOP60=
   file: /tmp/README.pdf
   on:
-    # tags: true
-    all_branches: true
+    tags: true
+    # all_branches: true
