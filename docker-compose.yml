@@ -1,9 +1,7 @@
 version: '3'
 services:
   phantom:
-    build:
-      context: .
-      dockerfile: .phantom/Dockerfile
+    build: .phantom
     volumes: 
       - ./:/data
     container_name: phantom
