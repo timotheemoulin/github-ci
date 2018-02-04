@@ -1,5 +1,9 @@
 language: ruby
 
+branches:
+  only:
+  - master
+
 # sudo is required to install docker-compose
 sudo: required
 
