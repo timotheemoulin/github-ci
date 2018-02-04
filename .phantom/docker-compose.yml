@@ -3,5 +3,5 @@ services:
   phantom:
     build: .
     volumes: 
-      - ./:/data
+      - ../:/data
     container_name: phantom
