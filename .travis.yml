@@ -33,10 +33,7 @@ script:
   # run the spell check
   # - bundle exec rake spell_check
   # run the phantom container
-  - docker-compose -f docker-compose.yml build
-  - docker-compose -f docker-compose.yml run --user='root' phantom /data/.phantom/rasterize.sh /data/README.md /tmp/README.pdf
-  - docker-compose -f docker-compose.yml run --user='root' phantom touch /tmp/foo
-  - docker-compose -f docker-compose.yml run --user='root' phantom ls -la /tmp/
+  - sh .phantom/run.sh
 # use the tag as a release and upload the generated PDF as an artifact
 deploy:
   # skip git stash --all that would remove generated files
