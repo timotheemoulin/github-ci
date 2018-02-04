@@ -36,6 +36,9 @@ USER phantomjs
 
 EXPOSE 8910
 
+RUN chmod -R 777 /data/.phantom/build
+RUN chmod +x /data/.phantom/run.sh
+
 WORKDIR /data
 
 ENTRYPOINT ["dumb-init"]
