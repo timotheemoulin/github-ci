@@ -11,3 +11,5 @@ mv /tmp/phantomjs/bin/phantomjs /usr/local/bin
 
 curl -Lo /tmp/dumb-init.deb https://github.com/Yelp/dumb-init/releases/download/v1.1.3/dumb-init_1.1.3_amd64.deb 
 dpkg -i /tmp/dumb-init.deb 
+
+phantomjs --version
