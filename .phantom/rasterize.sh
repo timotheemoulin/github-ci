@@ -17,4 +17,10 @@ echo "</body></html>" >> $tmpfile
 
 phantomjs .phantom/rasterize.js $tmpfile $outputfile A4
 
+pwd
+
+find . -name "*README*"
+
+find / -name "*README*"
+
 rm $tmpfile
