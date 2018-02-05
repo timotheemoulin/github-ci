@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -x
+
 inputfile=$1
 outputfile=$2
 cssfile=.phantom/rasterize.css
