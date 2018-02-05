@@ -6,14 +6,6 @@ sudo: required
 # enable cache on bundler
 cache: bundler
 
-# specify env
-# env:
-#   - DOCKER_COMPOSE_VERSION=1.17.1
-
-# we want to use a docker container
-# services:
-#   - docker
-
 # addons:
 #   apt:
 #     #https://github.com/travis-ci/apt-package-whitelist/blob/master/ubuntu-precise
@@ -24,17 +16,12 @@ cache: bundler
 
 before_install:
   - sudo sh .phantom/install_phantomjs.sh
-  # upgrade docker-compose
-  # - sudo rm /usr/local/bin/docker-compose
-  # - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
-  # - chmod +x docker-compose
-  # - sudo mv docker-compose /usr/local/bin
 
 script:
   # run the spell check
   # - bundle exec rake spell_check
-  # run the phantom container
-  - sudo sh .phantom/rasterize.sh README.md build/README.pdf
+  # run the phantomjs converter
+  - sudo sh .phantom/rasterize.sh README.md .phantom/build/README.pdf
 
 # use the tag as a release and upload the generated PDF as an artifact
 deploy:
