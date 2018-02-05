@@ -16,7 +16,7 @@ tmpfile=/tmp/markdown2pdf${outputfile##*/}.html
 
 # echo the basic html structure and add some nice css to it 
 echo "<html><head>" > $tmpfile
-echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"github.css\">" >> $tmpfile
+echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"$currentpath/github.css\">" >> $tmpfile
 echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"$cssfile\">" >> $tmpfile
 echo "</head><body>" >> $tmpfile
 
