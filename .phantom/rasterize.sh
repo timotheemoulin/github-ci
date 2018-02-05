@@ -2,7 +2,7 @@
 
 inputfile=$1
 outputfile=$2
-cssfile=rasterize.css
+cssfile=.phantom/rasterize.css
 tmpfile=/tmp/markdown2pdf${outputfile##*/}.html
  
 echo "<html><head>" > $tmpfile
@@ -13,6 +13,6 @@ echo "</head><body>" >> $tmpfile
 markdown $inputfile | iconv -f utf8 -t l1 >> $tmpfile
 echo "</body></html>" >> $tmpfile
 
-phantomjs rasterize.js $tmpfile $outputfile A4
+phantomjs .phantom/rasterize.js $tmpfile $outputfile A4
 
 rm $tmpfile
