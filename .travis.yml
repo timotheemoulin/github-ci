@@ -1,6 +1,6 @@
 language: ruby
 
-# sudo is required to install docker-compose
+# sudo is required to install packages
 sudo: required
 
 # enable cache on bundler
