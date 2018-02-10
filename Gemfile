@@ -4,6 +4,8 @@
 ##
 source "https://rubygems.org"
 
+gem 'redcarpet'
+
 group :test do
   gem 'rake'
 end

@@ -1,0 +1,168 @@
+<h1>Github-CI</h1>
+
+<p><a href="https://travis-ci.org/timotheemoulin/github-ci" rel="nofollow" target="_blank"><img src="https://travis-ci.org/timotheemoulin/github-ci.svg?branch=master" alt="Build Status"></a></p>
+
+<h2>Aspell</h2>
+
+<p><em>Aspell</em> is a spell checker that can be used to check your <em>markdown</em> files.</p>
+
+<p>Use it to ensure that you don&#39;t have misspelled words in your documentation.</p>
+
+<p>You can also write in English in French files, but you can&#39;t write in French in English files. Only one language per file in addition to English is authorized.</p>
+
+<h3>Configuration</h3>
+
+<p>First, add a <code class="prettyprint">.travis.yml</code> file to your project and write the following content.</p>
+
+<p>```yaml</p>
+
+<h1>ruby is the language used to launch the instruction</h1>
+
+<p>language: ruby</p>
+
+<h1>select the branches you want to check</h1>
+
+<p>branches:<br>
+  only:<br>
+  - master</p>
+
+<h1>add cache to your bundler</h1>
+
+<p>cache: bundler</p>
+
+<h1>add the aspell packages (one per language)</h1>
+
+<p>addons:<br>
+  apt:<br>
+    packages:<br>
+      - aspell<br>
+      - aspell-en<br>
+      - aspell-fr</p>
+
+<h1>execute rake default task</h1>
+
+<p>script:<br>
+  - bundle exec rake<br>
+```</p>
+
+<p>Then, add the <code class="prettyprint">Rakefile</code>.</p>
+
+<p>```ruby</p>
+
+<h1>Default task</h1>
+
+<p>task :default =&gt; [:spell_check]</p>
+
+<h1>Spell check task</h1>
+
+<p>task :spell_check do<br>
+  sh &#39;.aspell/spell-check.sh&#39;<br>
+end<br>
+```</p>
+
+<p>You also need a <code class="prettyprint">Gemfile</code> to fetch the needed ruby gems.</p>
+
+<p>```ruby<br>
+source &quot;<a href="https://rubygems.org" rel="nofollow" target="_blank">https://rubygems.org</a>&quot;</p>
+
+<p>group :test do<br>
+  gem &#39;rake&#39;<br>
+end<br>
+```</p>
+
+<p>Add the <code class="prettyprint">.aspell/spell-check.sh</code> script (you can get it <a href="https://github.com/timotheemoulin/github-ci/blob/master/.aspell/spell-check.sh" rel="nofollow" target="_blank">here</a>).</p>
+
+<p>Finally, add the custom dictionaries in <code class="prettyprint">.aspell/aspell.{lang}.pws</code>. You need at least one dictionary for English and one for all other language you specified in your <code class="prettyprint">.travis.yml</code> file.</p>
+
+<p>Dictionaries are structured like that :</p>
+
+<p><code class="prettyprint"><br>
+personal_ws-1.1 en 999 utf-8<br>
+PHP<br>
+Javascript<br>
+Git<br>
+</code></p>
+
+<p>Where : </p>
+
+<ul>
+<li><em>en</em> stands for the language name (same as in the file name)</li>
+<li><em>999</em> stands for the number of words in the dictionary (use a big number here if you don&#39;t want to change it every time)</li>
+<li><em>utf-8</em> is the encoding used in your file (keep it to <em>utf-8</em> if you need to use accents (like in French or German) or if your dictionary is used for multiple languages)</li>
+</ul>
+
+<h3>Global structure</h3>
+
+<p><code class="prettyprint"><br>
+.<br>
+├── .aspell<br>
+│   ├── aspell.en.pws<br>
+│   ├── aspell.fr.pws<br>
+│   └── spell-check.sh<br>
+├── Gemfile<br>
+├── Gemfile.lock<br>
+├── .gitignore<br>
+├── LICENSE<br>
+├── node_modules<br>
+├── Rakefile<br>
+├── README.fr.md<br>
+├── README.md<br>
+└── .travis.yml<br>
+</code></p>
+
+<h2>PhantomJS Markdown to PDF</h2>
+
+<p>What if I tell you that you can even provide an always up to date PDF version of your documentation? Sounds great right?</p>
+
+<p>You can once again use Travis-CI to build and deploy your documentation right into your release files.</p>
+
+<h3>Configuration</h3>
+
+<p>Travis-CI can only attach files to a release, not every commit will trigger the PDF generation.</p>
+
+<p>Add the following lines to your <code class="prettyprint">.travis</code> file.</p>
+
+<p><code class="prettyprint">yaml<br>
+sudo: required<br>
+before_install:<br>
+  - sudo sh .phantom/install_phantomjs.sh<br>
+script:<br>
+  - sudo sh .phantom/rasterize.sh README.md .phantom/build/README.pdf<br>
+deploy:<br>
+  skip_cleanup: true<br>
+  provider: releases<br>
+  api_key:<br>
+    secure: xxx<br>
+  file: .phantom/build/README.pdf<br>
+  on:<br>
+    tags: true<br>
+</code></p>
+
+<p>This tells Travis-CI to execute your <code class="prettyprint">.phantom/install_phantomjs.sh</code> script that installs PhantomJS before doing anything else.</p>
+
+<p>Then on the <code class="prettyprint">script</code> phase, execute the <code class="prettyprint">rasterize.sh</code> script to generate the PDF version of your <code class="prettyprint">README.md</code> file and store it somewhere (it doesn&#39;t really matter where).</p>
+
+<p>Once your build ends, the Travis-CI deploys your application to Github and adds the <code class="prettyprint">file</code> to the downloadable files attached to your release.</p>
+
+<h3>Global structure</h3>
+
+<p><code class="prettyprint"><br>
+.<br>
+├── Gemfile<br>
+├── Gemfile.lock<br>
+├── .gitignore<br>
+├── LICENSE<br>
+├── node_modules<br>
+├── .phantom<br>
+│   ├── build<br>
+│   │   └── .gitkeep<br>
+│   ├── github.css<br>
+│   ├── install_phantomjs.sh<br>
+│   ├── rasterize.css<br>
+│   ├── rasterize.js<br>
+│   └── rasterize.sh<br>
+├── Rakefile<br>
+├── README.fr.md<br>
+├── README.md<br>
+└── .travis.yml<br>
+</code></p>
