@@ -45,7 +45,7 @@ task :md_html do
   markdown_content = File.open('README.md').read
   html = markdown.render(markdown_content)
 
-  File.open('.phantom/build/README.html', 'w') {
+  File.open('.redcarpet/build/README.html', 'w') {
     |file| file.write(html)
   }
 end
