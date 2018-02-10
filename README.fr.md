@@ -1,8 +1,6 @@
-<!---
-#Author: Timothée Moulin
-#Date : 2018-01-02
-#Language: fr
--->
+[//]: # (#Author: Timothée Moulin)
+[//]: # (#Date : 2018-01-02)
+[//]: # (#Language: fr)
 
 # Github-CI
 

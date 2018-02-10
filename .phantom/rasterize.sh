@@ -21,7 +21,8 @@ echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"$cssfile\">" >> $tmpfile
 echo "</head><body>" >> $tmpfile
 
 # Latin1 works with iso-8859-1 (.js)
-markdown $inputfile | iconv -f utf8 -t l1 >> $tmpfile
+#markdown $inputfile | iconv -f utf8 -t l1 >> $tmpfile
+bundle exec rake md_html | iconv -f utf8 -t l1 >> $tmpfile
 echo "</body></html>" >> $tmpfile
 
 # convert our html version of markdown to pdf

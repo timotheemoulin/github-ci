@@ -37,15 +37,13 @@ echo -e "$BLUE>> Text will be checked without metadata, html, and links:$NC"
 # Check each file independently as each file has its own language
 for CURRENT_FILE in $CHANGED_FILES; do
 
-    FOUND_LANGUAGES=`echo "$CURRENT_FILE" | xargs cat | grep "$LANGUAGE_KEY" | sed -E "s/$LANGUAGE_KEY($AVAILABLE_LANGUAGES)/\1/g"`
-    echo -e "$BLUE>> Languages recognized from the metadata:$NC"
-    echo "$FOUND_LANGUAGES"
+    FOUND_LANGUAGES=`echo "$CURRENT_FILE" | xargs cat | grep "$LANGUAGE_KEY" | sed -E "s/\[\/\/\]\:\ \#\ \($LANGUAGE_KEY($AVAILABLE_LANGUAGES)\)/\1/g"`
 
     while read LINE; do
         if [ "$LINE" != "en" ]
         then
             FILE_LANGUAGE="$LINE"
-
+            echo -e "$BLUE>> Languages '$FILE_LANGUAGE' recognized from the metadata:$NC"
         fi
     done <<< "$FOUND_LANGUAGES"
 
@@ -64,12 +62,15 @@ for CURRENT_FILE in $CHANGED_FILES; do
     # Check content spelling in English
     echo -e "$BLUE>> Checking in English (many technical words are in English anyway)...$NC"
     MISSPELLED_EN=`echo "$CHANGED_CONTENT" | aspell --lang=en --personal=./.aspell/aspell.en.pws list | sort -u`
-    echo "$MISSPELLED_EN" | sed -E ':a;N;$!ba;s/\n/, /g'
+    MISSPELLED_EN="$MISSPELLED_EN" | sed -E ':a;N;$!ba;s/\n/, /g'
+    # echo $MISSPELLED_EN
+
     # Check content spelling in the detected language
     if [ "$FILE_LANGUAGE" != "en" ]; then
         echo -e "$BLUE>> Checking in '$FILE_LANGUAGE' too...$NC"
         MISSPELLED_LANG=`echo "$CHANGED_CONTENT" | aspell --lang=$FILE_LANGUAGE --personal=./.aspell/aspell.$FILE_LANGUAGE.pws list | sort -u`
-        echo "$MISSPELLED_LANG" | sed -E ':a;N;$!ba;s/\n/, /g'
+        MISSPELLED_LANG="$MISSPELLED_LANG" | sed -E ':a;N;$!ba;s/\n/, /g'
+        # echo $MISSPELLED_LANG
     fi
 
 done
@@ -77,14 +78,26 @@ done
 echo -e "filter matching"
 # Only cry if there is an unknown word in English and the specific language of the document
 MISSPELLED=()
-for WORD_EN in "${MISSPELLED_EN[@]}"; do
-    echo -e "en"
-    for WORD in "${MISSPELLED_LANG[@]}"; do
-        if [[ WORD_EN = $WORD ]]; then
-            MISSPELLED+=("$MISSPELLED_EN")
+
+while read LINE; do
+        if [ "$LINE" != "en" ]
+        then
+            FILE_LANGUAGE="$LINE"
+            echo -e "$BLUE>> Languages '$FILE_LANGUAGE' recognized from the metadata:$NC"
         fi
-    done
-done
+    done <<< "$FOUND_LANGUAGES"
+
+
+
+
+while read WORD_EN; do
+    while read WORD; do
+        if [[ $WORD_EN = $WORD ]]; then
+            MISSPELLED+=("$WORD_EN")
+            echo -e "$RED>> Misspelled word found : $WORD_EN $NC"
+        fi
+    done <<< $MISSPELLED_EN
+done <<< $MISSPELLED_LANG
 
 if [ -n "$MISSPELLED" ] ; then
 	NB_MISSPELLED=`echo "$MISSPELLED" | wc -l`

@@ -8,7 +8,7 @@ task :default => [:spell_check]
 
 # Run spell checking on all markdown (.md) files
 task :spell_check do
-  sh './bin/spell-check.sh'
+  sh '.aspell/spell-check.sh'
 end
 
 
@@ -42,10 +42,10 @@ task :md_html do
   renderer = Redcarpet::Render::HTML.new(options)
   markdown = Redcarpet::Markdown.new(renderer, extensions)
 
-  markdown_content = File.open('.redcarpet/github.md').read
+  markdown_content = File.open('README.md').read
   html = markdown.render(markdown_content)
 
-  File.open('.redcarpet/flavored_html.html', 'w') {
+  File.open('.phantom/build/README.html', 'w') {
     |file| file.write(html)
   }
 end
