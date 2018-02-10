@@ -49,17 +49,3 @@ task :redcarpet_html do
     |file| file.write(html)
   }
 end
-
-
-
-# Use kramdown to convert markdown to html
-task :kramdown_html do
-  require 'kramdown'
-  markdown_content = File.open('README.md').read
-  
-  html = Kramdown::Document.new(markdown_content).to_html
-
-  File.open('.kramdown/build/README.html', 'w') {
-    |file| file.write(html)
-  }
-end
