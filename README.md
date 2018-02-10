@@ -4,7 +4,9 @@
 
 # Github-CI
 
-[![Build Status](https://travis-ci.org/timotheemoulin/github-ci.svg?branch=master)](https://travis-ci.org/timotheemoulin/github-ci)
+Some methods to generate PDF from Markdown documentation.
+
+Also a spell checker.
 
 ## Aspell
 
@@ -88,19 +90,19 @@ Where :
 
 ```
 .
-├── .aspell
-│   ├── aspell.en.pws
-│   ├── aspell.fr.pws
-│   └── spell-check.sh
-├── Gemfile
-├── Gemfile.lock
-├── .gitignore
-├── LICENSE
-├── node_modules
-├── Rakefile
-├── README.fr.md
-├── README.md
-└── .travis.yml
+|-- .aspell
+|   |-- aspell.en.pws
+|   |-- aspell.fr.pws
+|   |-- spell-check.sh
+|-- Gemfile
+|-- Gemfile.lock
+|-- .gitignore
+|-- LICENSE
+|-- node_modules
+|-- Rakefile
+|-- README.fr.md
+|-- README.md
+--- .travis.yml
 ```
 
 ## PhantomJS Markdown to PDF
@@ -141,21 +143,21 @@ Once your build ends, the Travis-CI deploys your application to Github and adds 
 
 ```
 .
-├── Gemfile
-├── Gemfile.lock
-├── .gitignore
-├── LICENSE
-├── node_modules
-├── .phantom
-│   ├── build
-│   │   └── .gitkeep
-│   ├── github.css
-│   ├── install_phantomjs.sh
-│   ├── rasterize.css
-│   ├── rasterize.js
-│   └── rasterize.sh
-├── Rakefile
-├── README.fr.md
-├── README.md
-└── .travis.yml
+|-- Gemfile
+|-- Gemfile.lock
+|-- .gitignore
+|-- LICENSE
+|-- node_modules
+|-- .phantom
+|   |-- build
+|   |   --- .gitkeep
+|   |-- github.css
+|   |-- install_phantomjs.sh
+|   |-- rasterize.css
+|   |-- rasterize.js
+|   |-- rasterize.sh
+|-- Rakefile
+|-- README.fr.md
+|-- README.md
+|-- .travis.yml
 ```

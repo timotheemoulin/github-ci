@@ -1,6 +1,7 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    kramdown (1.16.2)
     rake (12.3.0)
     redcarpet (3.4.0)
 
@@ -8,6 +9,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  kramdown
   rake
   redcarpet
 
