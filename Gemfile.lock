@@ -2,12 +2,14 @@ GEM
   remote: https://rubygems.org/
   specs:
     rake (12.3.0)
+    redcarpet (3.4.0)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
   rake
+  redcarpet
 
 BUNDLED WITH
    1.13.6

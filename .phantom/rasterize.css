@@ -1,5 +1,5 @@
 body {
-    font-size: 12px;
+    font-size: 11px;
     line-height: 1.4;
 }
 
@@ -8,30 +8,30 @@ h1 {
 }
 
 h2 {
-    font-size: 18px;
-}
-
-h3 {
     font-size: 16px;
 }
 
-h4 {
+h3 {
     font-size: 14px;
 }
 
-h5 {
+h4 {
     font-size: 12px;
+}
+
+h5 {
+    font-size: 11px;
 }
 
 h6 {
-    font-size: 12px;
+    font-size: 11px;
 }
 
 dl dt{
-    font-size: 12px;
+    font-size: 11px;
 }
 
 .highlight pre,
 pre {
-    font-size: 12px;
+    font-size: 11px;
 }

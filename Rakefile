@@ -19,3 +19,33 @@ task :md_pdf do
 
 	sh 'pandoc --latex-engine=xelatex README.md -f markdown -o README.pdf'
 end
+
+
+# Use redcarpet to convert markdown to html
+task :md_html do
+  require 'redcarpet'
+  # Initializes a Markdown parser
+  options = {
+    filter_html:     true,
+    hard_wrap:       true,
+    link_attributes: { rel: 'nofollow', target: "_blank" },
+    space_after_headers: true,
+    fenced_code_blocks: true,
+    prettify: true
+  }
+  
+  extensions = {
+    autolink:           true,
+    superscript:        true,
+    disable_indented_code_blocks: true
+  }
+  renderer = Redcarpet::Render::HTML.new(options)
+  markdown = Redcarpet::Markdown.new(renderer, extensions)
+
+  markdown_content = File.open('.redcarpet/github.md').read
+  html = markdown.render(markdown_content)
+
+  File.open('.redcarpet/flavored_html.html', 'w') {
+    |file| file.write(html)
+  }
+end
