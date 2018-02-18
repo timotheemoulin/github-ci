@@ -18,6 +18,7 @@ To specify a paragraph, leave 2 spaces at the end of the line
 ```
 
 will produce
+
 # Sample H1
 ## Sample H2
 ### Sample H3
@@ -31,6 +32,8 @@ Horizontal rule is created using `---` on a line by itself.
 ---
 
 ## Coding - Block
+
+a
 
 <pre>
 ```ruby
@@ -52,6 +55,8 @@ g = Greeter.new("world")
 g.salute
 ```
 </pre>
+
+z
  
 will produce  
 
@@ -80,7 +85,7 @@ Note: You must leave a blank line before the `\`\`\``
 ## Coding - In-line
 You can produce inline-code by using only one \` to enclose the code:
 
-```
+```md
 This is some code: `echo something`
 ```
 
@@ -100,7 +105,7 @@ This is some code: `echo something`
 - GFMD will automatically detect URL and convert them to links like this http://www.futureworkz.com
 - To specify a link on a text, do this:
 
-```
+```md
 This is [an example](http://example.com/ "Title") inline link.
 [This link](http://example.net/) has no title attribute.
 ```
@@ -116,7 +121,7 @@ You can escape using \\ eg. \\\`
 
 Adding a `-` will change it into a list:
 
-```
+```md
 - Item 1
 - Item 2
 - Item 3
@@ -134,7 +139,7 @@ will produce
 
 You can create a quote using `>`:
 
-```
+```md
 > This is a quote
 ```
 
@@ -190,6 +195,6 @@ will produce
 
 ## Adding Image
 
-```
+```md
 ![Branching Concepts](http://git-scm.com/figures/18333fig0319-tn.png "Branching Map")
 ```
